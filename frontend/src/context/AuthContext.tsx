@@ -8,11 +8,13 @@ import {
 import { authForFirebaseUI } from "../firebaseConfig";
 
 interface IAuthContext {
+  loading: boolean
   user: User | null;
   signOut: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({
+  loading: true,
   user: null,
   signOut: () => null,
 });
@@ -23,14 +25,12 @@ interface IAuthProvider {
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(authForFirebaseUI, async (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+      setUser(user)
+      setLoading(false)
     });
 
     return () => unsubscribe();
@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   return (
     <AuthContext.Provider
       value={{
+        loading,
         user,
         signOut,
       }}
