@@ -2,6 +2,9 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
+import "firebase/compat/auth";
+import compatApp from "firebase/compat/app";
+
 const firebaseConfig = {
   apiKey: "AIzaSyANtJhRFJERgcRvjYrQQKhLFG1WD_XMako",
   authDomain: "dvlyon-naturalcycles.firebaseapp.com",
@@ -14,3 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+compatApp.initializeApp(firebaseConfig);
+export const authForFirebaseUI = compatApp.auth()
