@@ -1,44 +1,44 @@
-import PhoneSignIn from "./components/PhoneSignIn";
-import Spinner from "./components/Spinner";
-import UserPanel from "./components/UserPanel";
-import { AuthProvider } from "./context/AuthContext";
-import useAuth from "./hooks/useAuth";
+import PhoneSignIn from './components/PhoneSignIn'
+import Spinner from './components/Spinner'
+import UserPanel from './components/UserPanel'
+import { AuthProvider } from './context/AuthContext'
+import useAuth from './hooks/useAuth'
 
 const App = () => (
   <AuthProvider>
     <AppContent />
   </AuthProvider>
-);
+)
 
 const AppContent = () => {
-  const { user, loading } = useAuth();
+  const { user, loading } = useAuth()
 
   if (loading) {
     return (
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
         }}
       >
         <Spinner />
       </div>
-    );
+    )
   }
 
   return (
     <div
       style={{
-        backgroundColor: "#F7F7F7",
-        minHeight: "100vh",
-        padding: "20px",
+        backgroundColor: '#F7F7F7',
+        minHeight: '100vh',
+        padding: '20px',
       }}
     >
       {user ? <UserPanel /> : <PhoneSignIn />}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

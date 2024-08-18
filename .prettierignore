@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+lib/
+*.md
+*.json
+*.yml
+*.yaml
+*.lock
+*.js
+*.jsx
+*.html
+*.css

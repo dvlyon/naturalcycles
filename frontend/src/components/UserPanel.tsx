@@ -1,104 +1,104 @@
-import { useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import FormWrapper from "./FormWrapper";
-import Button from "./Button";
-import Input from "./Input";
-import { styled } from "styled-components";
-import Title from "./Title";
-import ErrorLabel from "./ErrorLabel";
+import { useState, useEffect } from 'react'
+import useAuth from '../hooks/useAuth'
+import FormWrapper from './FormWrapper'
+import Button from './Button'
+import Input from './Input'
+import { styled } from 'styled-components'
+import Title from './Title'
+import ErrorLabel from './ErrorLabel'
 
 const StyledDiv = styled.div`
   display: flex;
   gap: 0.5em;
-`;
+`
 
 const UserPanel = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [nameError, setNameError] = useState('')
+  const [emailError, setEmailError] = useState('')
 
-  const { user, signOut } = useAuth();
+  const { user, signOut } = useAuth()
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const idToken = await user?.getIdToken();
+        const idToken = await user?.getIdToken()
 
         const response = await fetch(import.meta.env.VITE_PROFILE_URL, {
-          method: "GET",
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${idToken}`,
           },
-        });
+        })
 
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.json()
 
-          setName(data.name || "");
-          setEmail(data.email || "");
+          setName(data.name || '')
+          setEmail(data.email || '')
         } else {
-          console.log("Failed to fetch profile.");
+          console.log('Failed to fetch profile.')
         }
       } catch (error) {
-        console.error("Error fetching profile:", error);
+        console.error('Error fetching profile:', error)
       }
-    };
+    }
 
     if (user) {
-      fetchProfile();
+      fetchProfile()
     }
-  }, [user]);
+  }, [user])
 
   const validate = () => {
-    let valid = true;
+    let valid = true
 
-    if (name.trim() === "") {
-      setNameError("Name cannot be empty.");
-      valid = false;
+    if (name.trim() === '') {
+      setNameError('Name cannot be empty.')
+      valid = false
     } else {
-      setNameError("");
+      setNameError('')
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setEmailError("Please enter a valid email.");
-      valid = false;
+      setEmailError('Please enter a valid email.')
+      valid = false
     } else {
-      setEmailError("");
+      setEmailError('')
     }
 
-    return valid;
-  };
+    return valid
+  }
 
   const handleSave = async () => {
     if (!validate()) {
-      return;
+      return
     }
 
     try {
-      const idToken = await user?.getIdToken();
+      const idToken = await user?.getIdToken()
 
       const response = await fetch(import.meta.env.VITE_PROFILE_URL, {
-        method: "POST",
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${idToken}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, email }),
-      });
+      })
 
       if (response.ok) {
-        alert("Profile updated successfully.");
+        alert('Profile updated successfully.')
       } else {
-        alert("Failed to update profile.");
+        alert('Failed to update profile.')
       }
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error('Error updating profile:', error)
 
-      alert("Error updating profile.");
+      alert('Error updating profile.')
     }
-  };
+  }
 
   return (
     <FormWrapper>
@@ -122,7 +122,7 @@ const UserPanel = () => {
         <Button onClick={signOut}>Logout</Button>
       </StyledDiv>
     </FormWrapper>
-  );
-};
+  )
+}
 
-export default UserPanel;
+export default UserPanel

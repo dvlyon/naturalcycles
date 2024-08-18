@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colours } from "../utils/colours";
+import styled from 'styled-components'
+import { colours } from '../utils/colours'
 
 const Input = styled.input`
   width: 100%;
@@ -14,6 +14,6 @@ const Input = styled.input`
     border-color: ${colours.primary};
     outline: none;
   }
-`;
+`
 
-export default Input;
+export default Input
