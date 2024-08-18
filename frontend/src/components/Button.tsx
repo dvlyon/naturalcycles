@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { colours } from '../utils/colours';
+import styled from "styled-components";
+import { colours } from "../utils/colours";
 
-const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
+const Button = styled.button<{ variant?: "primary" | "secondary" }>`
   background-color: ${(props) =>
-    props.variant === 'secondary' ? colours.secondary : colours.primary};
+    props.variant === "secondary" ? colours.secondary : colours.primary};
   color: ${colours.white};
   border: 2px solid ${colours.secondary};
   padding: 10px 20px;
@@ -14,9 +14,9 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 
   &:hover {
     background-color: ${(props) =>
-      props.variant === 'secondary'
-        ? colours.borderHover // Light purple hover for secondary
-        : colours.buttonHover}; // Darker purple hover for primary
+      props.variant === "secondary"
+        ? colours.borderHover
+        : colours.buttonHover};
     border-color: ${colours.borderHover};
   }
 

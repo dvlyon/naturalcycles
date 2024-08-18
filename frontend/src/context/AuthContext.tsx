@@ -1,14 +1,9 @@
 import { onAuthStateChanged, User } from "firebase/auth";
-import {
-  createContext,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
-import { authForFirebaseUI } from "../firebaseConfig";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { auth } from "../firebaseConfig";
 
 interface IAuthContext {
-  loading: boolean
+  loading: boolean;
   user: User | null;
   signOut: () => void;
 }
@@ -28,16 +23,16 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(authForFirebaseUI, async (user) => {
-      setUser(user)
-      setLoading(false)
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   const signOut = () => {
-    authForFirebaseUI.signOut();
+    auth.signOut();
   };
 
   return (

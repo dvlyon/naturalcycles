@@ -1,18 +1,14 @@
 import PhoneSignIn from "./components/PhoneSignIn";
 import Spinner from "./components/Spinner";
-import UserPanel from "./components/UserPanel"; // Corrected the typo in the import
+import UserPanel from "./components/UserPanel";
 import { AuthProvider } from "./context/AuthContext";
 import useAuth from "./hooks/useAuth";
 
-const App = () => {
-  console.log("App rendered");
-
-  return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
-  );
-};
+const App = () => (
+  <AuthProvider>
+    <AppContent />
+  </AuthProvider>
+);
 
 const AppContent = () => {
   const { user, loading } = useAuth();

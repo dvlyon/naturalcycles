@@ -13,29 +13,28 @@ const StyledDiv = styled.div`
 `;
 
 const UserPanel = () => {
-  const { user, signOut } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
+
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const idToken = await user?.getIdToken();
 
-        const response = await fetch(
-          "https://us-central1-dvlyon-naturalcycles.cloudfunctions.net/api/profile",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        );
+        const response = await fetch(import.meta.env.VITE_PROFILE_URL, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
+
           setName(data.name || "");
           setEmail(data.email || "");
         } else {
@@ -80,17 +79,14 @@ const UserPanel = () => {
     try {
       const idToken = await user?.getIdToken();
 
-      const response = await fetch(
-        "https://us-central1-dvlyon-naturalcycles.cloudfunctions.net/api/profile",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email }),
-        }
-      );
+      const response = await fetch(import.meta.env.VITE_PROFILE_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email }),
+      });
 
       if (response.ok) {
         alert("Profile updated successfully.");
@@ -99,6 +95,7 @@ const UserPanel = () => {
       }
     } catch (error) {
       console.error("Error updating profile:", error);
+
       alert("Error updating profile.");
     }
   };

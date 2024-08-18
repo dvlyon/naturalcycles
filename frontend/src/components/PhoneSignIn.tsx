@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { PhoneAuthProvider } from "firebase/auth";
 import * as firebaseui from "firebaseui";
-import { authForFirebaseUI } from "../firebaseConfig";
-import "firebaseui/dist/firebaseui.css";
+import { auth } from "../firebaseConfig";
 import FormWrapper from "./FormWrapper";
 import Title from "./Title";
+import "firebaseui/dist/firebaseui.css";
 
 const PhoneSignIn = () => {
   useEffect(() => {
@@ -29,8 +29,7 @@ const PhoneSignIn = () => {
     };
 
     const ui =
-      firebaseui.auth.AuthUI.getInstance() ||
-      new firebaseui.auth.AuthUI(authForFirebaseUI);
+      firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
 
     ui.start("#firebaseui-auth-container", uiConfig);
   }, []);

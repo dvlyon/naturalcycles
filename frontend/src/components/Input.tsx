@@ -1,6 +1,5 @@
-// Input.tsx
-import styled from 'styled-components';
-import { colours } from '../utils/colours';
+import styled from "styled-components";
+import { colours } from "../utils/colours";
 
 const Input = styled.input`
   width: 100%;

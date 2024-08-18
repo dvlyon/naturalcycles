@@ -1,6 +1,5 @@
-// FormWrapper.tsx
-import styled from 'styled-components';
-import { colours } from '../utils/colours';
+import styled from "styled-components";
+import { colours } from "../utils/colours";
 
 const FormWrapper = styled.div`
   max-width: 400px;

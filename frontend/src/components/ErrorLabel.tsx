@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { colours } from '../utils/colours';
+import styled from "styled-components";
+import { colours } from "../utils/colours";
 
 const ErrorLabel = styled.div`
   color: ${colours.danger};

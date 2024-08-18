@@ -1,9 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
+import app from "firebase/compat/app";
 import "firebase/compat/auth";
-import compatApp from "firebase/compat/app";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,9 +10,5 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-
-compatApp.initializeApp(firebaseConfig);
-export const authForFirebaseUI = compatApp.auth();
+app.initializeApp(firebaseConfig);
+export const auth = app.auth();
